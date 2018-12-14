@@ -1,0 +1,18 @@
+{
+  "name": "hummus-lambda-layer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "update": "yarn prep && yarn publish-layer",
+    "prep": "rm -rf dist/nodejs/*; cp package.json dist/nodejs/; cd dist/nodejs; yarn --production; cd ..; zip -r /tmp/hummus-lambda-layer.zip nodejs",
+    "publish-layer": "aws lambda publish-layer-version --layer-name \"hummus-lambda-layer\" --description \"NodeJS module of Hummus library\" --license-info \"MIT\" --compatible-runtimes \"nodejs8.10\" --zip-file \"fileb:////tmp/hummus-lambda-layer.zip\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hummus": "^1.0.95",
+    "hummus-recipe": "^1.8.0"
+  }
+}
