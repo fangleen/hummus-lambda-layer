@@ -1,0 +1,34 @@
+
+version: 2
+jobs:
+  deploy_hummus_layer:
+    docker:
+      - image: turbopatent/docker-lambda:latest
+
+    environment:
+       BASH_ENV: ~/.bashrc
+
+    steps:
+      - checkout
+      - run:
+          name: install hummus
+          command: |
+            mkdir -p dist/nodejs
+            cp package.json dist/nodejs/
+            cd dist/nodejs
+            yarn --production
+      - run:
+          name: zip layer
+          command: |
+            cd dist
+            zip -r /tmp/hummus-lambda-layer.zip nodejs
+      - deploy:
+          command: |
+            aws lambda publish-layer-version --region "us-east-1" --layer-name "hummus-lambda-layer" --description "NodeJS module of Hummus library" --license-info "MIT" --compatible-runtimes "nodejs8.10" --zip-file "fileb:////tmp/hummus-lambda-layer.zip"
+            
+workflows:
+  version: 2
+  deploy-a-ronie:
+    jobs:
+      - deploy_hummus_layer:
+          context: org-global
