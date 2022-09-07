@@ -3,7 +3,7 @@ version: 2
 jobs:
   deploy_hummus_layer:
     docker:
-      - image: turbopatent/docker-lambda:nodejs10.x
+      - image: turbopatent/docker-lambda:nodejs16.x
 
     environment:
        BASH_ENV: ~/.bashrc
@@ -24,7 +24,7 @@ jobs:
             zip -r /tmp/hummus-lambda-layer.zip nodejs
       - deploy:
           command: |
-            aws lambda publish-layer-version --region "us-east-1" --layer-name "hummus-lambda-layer" --description "NodeJS module of Hummus library" --license-info "MIT" --compatible-runtimes "nodejs10.x" --zip-file "fileb:////tmp/hummus-lambda-layer.zip"
+            aws lambda publish-layer-version --region "us-east-1" --layer-name "hummus-lambda-layer" --description "NodeJS module of Hummus library" --license-info "MIT" --compatible-runtimes "nodejs16.x" --zip-file "fileb:////tmp/hummus-lambda-layer.zip"
 
 workflows:
   version: 2
