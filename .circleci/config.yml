@@ -31,4 +31,6 @@ workflows:
   deploy-a-ronie:
     jobs:
       - deploy_hummus_layer:
-          context: org-global
+          context:
+              - aws-circleuser
+
