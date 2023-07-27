@@ -7,7 +7,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hummus-recipe": "^2.0.1",
-    "spellchecker": "^3.7.1"
+    "hummus": "^1.0.116"
   }
 }
