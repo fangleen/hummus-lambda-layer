@@ -3,7 +3,7 @@ version: 2
 jobs:
   deploy_hummus_layer:
     docker:
-      - image: turbopatent/docker-lambda:nodejs16.x
+      - image: amazon/aws-lambda-nodejs
 
     environment:
        BASH_ENV: ~/.bashrc
